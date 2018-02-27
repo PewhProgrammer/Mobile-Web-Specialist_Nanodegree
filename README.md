@@ -24,6 +24,16 @@ In a terminal, check the version of Python you have: `python -V`. If you have Py
 
 Most of the code in this project has been written to the ES6 JavaScript specification for compatibility with modern web browsers and future proofing JavaScript code. As much as possible, try to maintain use of ES6 in any additional JavaScript you write. 
 
+### Fix steps
+
+* added viewport and encoding level
+* added flexbox around filter and applied mostly fluid
+* added responsive images small, medium and large
+* replace ratings with stars
+* added flexible font sizes, font styles
+*
+
+
 
 # Mobile-Web-Specialist_Nanodegree
 This repository describes all projects during my six month educational path for the nanodegree as Mobile Web Specialist. This course has been created by Udacity in partnership with Google and was sponsored by them after a selective challenge over 200k participants.

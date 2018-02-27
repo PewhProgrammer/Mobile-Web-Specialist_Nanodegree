@@ -55,9 +55,27 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const address = document.getElementById('restaurant-address');
   address.innerHTML = restaurant.address;
 
-  const image = document.getElementById('restaurant-img');
-  image.className = 'restaurant-img'
-  image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  const picture = document.getElementById('restaurant-img');
+  picture.className = 'restaurant-img';
+
+  const imageRef = DBHelper.imageUrlForRestaurant(restaurant).split(".");
+
+  const src_small = document.createElement('source');
+  src_small.setAttribute("media","(min-width: 781px) and (max-width: 1050px)");
+  src_small.setAttribute("srcset",imageRef[0]+"_medium_1x."+imageRef[1]);
+  const src_medium = document.createElement('source');
+  src_medium.setAttribute("media","(max-width: 780px)");
+  src_medium.setAttribute("srcset",imageRef[0]+"_large_1x."+imageRef[1]);
+  const src_large = document.createElement('source');
+  src_large.setAttribute("media","(min-width: 390w)");
+
+  const image = document.createElement('img');
+  image.className = 'restaurant-img';
+  image.src = imageRef[0]+"_large_1x."+imageRef[1];
+
+  picture.append(src_small);
+  picture.append(src_medium);
+  picture.append(image);
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
@@ -126,7 +144,9 @@ createReviewHTML = (review) => {
   li.appendChild(date);
 
   const rating = document.createElement('p');
-  rating.innerHTML = `Rating: ${review.rating}`;
+  const stars = Array(review.rating).join(' &#9733');
+
+  rating.innerHTML = `Rating: ${stars}`;
   li.appendChild(rating);
 
   const comments = document.createElement('p');

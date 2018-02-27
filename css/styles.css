@@ -71,7 +71,7 @@ nav h1 a {
     background-color: #eee;
     font-size: 17px;
     margin: 0;
-    width: calc(50% - 80px);
+    width: 100%;
 }
 
 /* Display list items side by side */
@@ -108,14 +108,10 @@ nav h1 a {
   width: 100%;
   height: 50px;
   background-color: #3397DB;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
   align-items: center;
-}
-.filter-options h2 {
-  color: white;
-  font-size: 1rem;
-  font-weight: normal;
-  line-height: 1;
-  margin: 0 20px;
 }
 .filter-options select {
   background-color: white;
@@ -126,10 +122,24 @@ nav h1 a {
   letter-spacing: 0;
   margin: 10px;
   padding: 0 10px;
-  width: 200px;
+  min-width: 180px;
+  width: 30%;
+}
+.filter-options h2 {
+  color: black;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1;
+  margin: 0 20px;
 }
 
 /* ====================== Restaurant Listing ====================== */
+.restaurants-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
 #restaurants-list {
   background-color: #f3f3f3;
   list-style: outside none none;
@@ -150,10 +160,10 @@ nav h1 a {
 #restaurants-list .restaurant-img {
   background-color: #ccc;
   display: block;
-  margin: 0;
+  margin: 0 0 50px 0;
   max-width: 100%;
-  min-height: 248px;
-  min-width: 100%;
+  min-height: 150px;
+  min-width: 180px;
 }
 #restaurants-list li h1 {
   color: #f18200;
@@ -192,6 +202,7 @@ nav h1 a {
 .inside #map-container {
   background: blue none repeat scroll 0 0;
   height: 87%;
+  min-height: 450px;
   position: fixed;
   right: 0;
   top: 80px;
@@ -205,7 +216,7 @@ nav h1 a {
 .inside #footer {
   bottom: 0;
   position: absolute;
-  width: 50%;
+  width: 100%;
 }
 #restaurant-name {
   color: #f18200;
@@ -217,8 +228,9 @@ nav h1 a {
   text-transform: uppercase;
   line-height: 1.1;
 }
-#restaurant-img {
-	width: 90%;
+#restaurant-img > img {
+	width: 100%;
+    max-width: 390px;
 }
 #restaurant-address {
   font-size: 12pt;
@@ -234,7 +246,8 @@ nav h1 a {
   padding: 2px 0;
   text-align: center;
   text-transform: uppercase;
-	width: 90%;
+  width: 100%;
+  max-width: 390px;
 }
 #restaurant-container, #reviews-container {
   border-bottom: 1px solid #d9d9d9;

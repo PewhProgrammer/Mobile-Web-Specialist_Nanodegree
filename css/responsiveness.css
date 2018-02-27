@@ -1,0 +1,75 @@
+@charset "utf-8";
+/* CSS Document */
+
+.filter-results{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14pt;
+}
+
+/* mostly fluid pattern */
+
+@media screen and (max-width: 550px) {
+    .filter-options {
+        height: 150px;
+        justify-content: center;
+    }
+    .filter-options select {
+        width:80%;
+    }
+
+    .filter-options h2 {
+        width:100%;
+        order:0;
+        text-align:center;
+    }
+    p {
+        font-size: 16px;
+        line-height: 1.2em;
+    }
+}
+
+@media screen and (max-width: 775px) {
+    #restaurants-list li {
+        width: 350px;
+    }
+}
+
+/* layout shifter */
+/* used for detailed restaurant */
+
+@media screen and (max-width: 1050px) {
+    #maincontent.detailed-layout {
+        display:flex;
+    }
+    .inside #map-container {
+        order: 0;
+        background: blue none repeat scroll 0 0;
+        height: 22%;
+        position: absolute;
+        right: 0;
+        top: 80px;
+        width: 100%;
+        max-height:300px;
+    }
+    #restaurant-container{
+        padding: 550px 40px 30px;
+        width: 33%;
+    }
+    #reviews-container{
+        padding: 550px 40px 30px;
+        width: 66%;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    #maincontent.detailed-layout {
+        flex-wrap: wrap;
+    }
+    #restaurant-container, #reviews-container{
+        width: 100%;
+    }
+    #reviews-container{
+        width: 100%;
+        padding: 3vh 40px 30px;
+    }
+}

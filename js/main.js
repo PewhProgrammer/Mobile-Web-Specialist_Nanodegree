@@ -5,6 +5,24 @@ var map
 var markers = []
 
 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js').then(function(registration) {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+
+      // here you can look for notifying the user about available updates and force the sw
+      // to update itself
+      // registration.installing and registration.update()
+      }, function(err) {
+      // registration failed :(
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
+
+
+
 /**
  * sleep function
  * @param ms
@@ -103,19 +121,16 @@ window.initMap = () => {
   /**
    * adds tabindex of -1 to every child
    */
-
   google.maps.event.addListenerOnce(self.map, 'tilesloaded', async function(){
     // do something only the first time the map is loaded
     let el = $("#map").find("*");
     while(el.length < 180){ // check if google has been loaded fully
-      await sleep(500); // set intervall to 500ms
+      await sleep(500); // set interval to 500ms
       el = $("#map").find("*");
     }
 
     // set all children tabindex to -1
-    el.find("*").each(function() {
-      $( this ).attr("tabindex",-1);
-    });
+    el.find("*").attr("tabindex",-1)
   });
 
   updateRestaurants();
@@ -174,25 +189,31 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
  * Create restaurant HTML.
  */
 createRestaurantHTML = (restaurant) => {
-  const li = document.createElement('li');
   //console.log(restaurant);
-  const imageRef = DBHelper.imageUrlForRestaurant(restaurant).split(".");
 
+  const li = document.createElement('li');
+  const imageRef = DBHelper.imageUrlForRestaurant(restaurant).split(".");
+  const thumbnailID = restaurant.id + "_thumbnail";
+  const neighborhoodID = restaurant.id + "_neighborhood";
+  const addressID = restaurant.id + "_address";
   const picture = document.createElement('picture');
   const src_small = document.createElement('source');
+  const src_medium = document.createElement('source');
+  const image = document.createElement('img');
+
+  li.setAttribute("tabindex",0);
+  picture.id = thumbnailID;
+
   src_small.setAttribute("media","(max-width: 343px)");
   src_small.setAttribute("srcset",imageRef[0]+"_small_1x."+imageRef[1]);
-  const src_medium = document.createElement('source');
   src_medium.setAttribute("media","(max-width: 780px)");
   src_medium.setAttribute("srcset",imageRef[0]+"_large_1x."+imageRef[1]);
-  const src_large = document.createElement('source');
-  src_large.setAttribute("media","(min-width: 390w)");
 
-  const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = imageRef[0]+"_medium_1x."+imageRef[1];
   image.alt = `A thumbnail picture of the restaurant 
-  ${restaurant.name} which specialized in ${restaurant.cuisine_type} food`;
+  ${restaurant.name} which specializes in ${restaurant.cuisine_type} food.`;
+
   picture.append(src_small);
   picture.append(src_medium);
   picture.append(image);
@@ -202,21 +223,27 @@ createRestaurantHTML = (restaurant) => {
   name.innerHTML = restaurant.name;
   li.append(name);
 
-  // TODO: setAttribute for aria-labels on p tags and headings
-
   const neighborhood = document.createElement('p');
+  neighborhood.id = neighborhoodID;
   neighborhood.innerHTML = restaurant.neighborhood;
-  neighborhood.setAttribute("aria-labelledby","Label");
   li.append(neighborhood);
 
   const address = document.createElement('p');
+  address.id = addressID;
   address.innerHTML = restaurant.address;
+  address.setAttribute("aria-label",restaurant.address.replace(/,/g, ' ') + ".")
+
   li.append(address);
 
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
   li.append(more);
+
+
+  // create labelledby attribute for li
+  // containing thumbnail and address information
+  li.setAttribute("aria-labelledby",thumbnailID + " " + neighborhoodID + " " + addressID);
 
   return li;
 }

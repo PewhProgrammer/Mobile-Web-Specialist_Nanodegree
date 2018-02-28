@@ -36,7 +36,7 @@
     </section>
     <!-- End map -->
     <!-- Beginning restaurant -->
-    <section id="restaurant-container">
+    <section tabindex="0" id="restaurant-container">
       <h1 id="restaurant-name"></h1>
       <picture id="restaurant-img">
 
@@ -47,7 +47,7 @@
     </section>
     <!-- end restaurant -->
     <!-- Beginning reviews -->
-    <section id="reviews-container">
+    <section tabindex="0" id="reviews-container">
       <ul id="reviews-list"></ul>
     </section>
     <!-- End reviews -->
@@ -61,12 +61,18 @@
   <!-- End footer -->
 
   <!-- Beginning scripts -->
+  <!-- jquery -->
+  <script
+          src="https://code.jquery.com/jquery-3.3.1.min.js"
+          integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+          crossorigin="anonymous">
+  </script>
   <!-- Database helpers -->
   <script type="text/javascript" src="js/dbhelper.js"></script>
   <!-- Main javascript file -->
   <script type="text/javascript" src="js/restaurant_info.js"></script>
   <!-- Google Maps -->
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_tKbW6A5pQ-eupxI56myUnHLqYCzOjKo&libraries=places&callback=initMap"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBUQf7otIr32Sh0MgRDLNevOFY-2tqAKc&libraries=places&callback=initMap"></script>
   <!-- End scripts -->
 
 </body>

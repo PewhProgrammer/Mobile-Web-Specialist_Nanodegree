@@ -31,7 +31,16 @@ Most of the code in this project has been written to the ES6 JavaScript specific
 * added responsive images small, medium and large
 * replace ratings with stars
 * added flexible font sizes, font styles
-*
+
+* arranged taborder
+* excluded google maps from taborder
+* formated aria-labels where needed
+* added roles where needed
+
+* registered service worker
+* caches any html,js,css,.. files
+* installed idb promises through npm
+
 
 
 

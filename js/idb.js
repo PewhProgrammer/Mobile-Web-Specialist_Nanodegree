@@ -1,8 +1,9 @@
 /**
  * Created by Thinh-Laptop on 28.02.2018.
  */
-import idb from 'idb_lib';
+import "./idb_lib.js";
 
+/*
 const dbPromise = idb.open('products', 1, function(upgradeDB) {
   let store = upgradeDB.createObjectStore('beverages', {
     keyPath: 'id'
@@ -19,3 +20,4 @@ dbPromise.then(function(db){
 }).then(function(val){
   console.log("The value of the 1st beverage is: " + val);
 });
+  */

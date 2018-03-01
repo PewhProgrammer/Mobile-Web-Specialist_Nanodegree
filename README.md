@@ -1,5 +1,26 @@
 # Mobile Web Specialist Certification Course
 ---
+
+# Fix steps
+
+* added viewport and encoding level
+* added flexbox around filter and applied mostly fluid
+* added responsive images small, medium and large
+* replace ratings with stars
+* added flexible font sizes, font styles
+
+* arranged taborder
+* excluded google maps from taborder
+* formated aria-labels where needed
+* added roles where needed
+
+* registered service worker
+* caches any html,js,css,.. files
+* installed idb promises through npm
+* added install,activate and fetch handler
+
+
+
 #### _Three Stage Course Material Project - Restaurant Reviews_
 
 ## Project Overview: Stage 1
@@ -23,25 +44,6 @@ In a terminal, check the version of Python you have: `python -V`. If you have Py
 ### Note about ES6
 
 Most of the code in this project has been written to the ES6 JavaScript specification for compatibility with modern web browsers and future proofing JavaScript code. As much as possible, try to maintain use of ES6 in any additional JavaScript you write. 
-
-### Fix steps
-
-* added viewport and encoding level
-* added flexbox around filter and applied mostly fluid
-* added responsive images small, medium and large
-* replace ratings with stars
-* added flexible font sizes, font styles
-
-* arranged taborder
-* excluded google maps from taborder
-* formated aria-labels where needed
-* added roles where needed
-
-* registered service worker
-* caches any html,js,css,.. files
-* installed idb promises through npm
-
-
 
 
 # Mobile-Web-Specialist_Nanodegree

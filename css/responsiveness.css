@@ -8,6 +8,15 @@
 
 /* mostly fluid pattern */
 
+@media screen and (max-width: 450px) {
+    .restaurant-img{
+        width:100%;
+    }
+    #reviews-container{
+        padding: 550px 5% 30px;
+    }
+}
+
 @media screen and (max-width: 550px) {
     .filter-options {
         height: 150px;
@@ -51,6 +60,9 @@
         width: 100%;
         max-height:300px;
     }
+    .inside #footer {
+        position: initial;
+    }
     #restaurant-container{
         padding: 550px 40px 30px;
         width: 33%;
@@ -59,17 +71,34 @@
         padding: 550px 40px 30px;
         width: 66%;
     }
+
+
 }
 
 @media screen and (max-width: 780px) {
     #maincontent.detailed-layout {
         flex-wrap: wrap;
     }
-    #restaurant-container, #reviews-container{
+    #restaurant-container{
         width: 100%;
     }
     #reviews-container{
+        padding: 3vh 20% 30px;
         width: 100%;
-        padding: 3vh 40px 30px;
+    }
+    #restaurant-container{
+        padding: 550px 0 30px 20%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .restaurant-img{
+        width:100%;
+    }
+    #reviews-container{
+        padding: 3vh 1% 30px;
+    }
+    #restaurant-container{
+        padding: 550px 1% 30px;
     }
 }

@@ -120,7 +120,9 @@ window.initMap = () => {
 
   /**
    * adds tabindex of -1 to every child
+   * appearently, we need it so..
    */
+  /*
   google.maps.event.addListenerOnce(self.map, 'tilesloaded', async function(){
     // do something only the first time the map is loaded
     let el = $("#map").find("*");
@@ -132,7 +134,7 @@ window.initMap = () => {
     // set all children tabindex to -1
     el.find("*").attr("tabindex",-1)
   });
-
+*/
   updateRestaurants();
 }
 
@@ -219,7 +221,7 @@ createRestaurantHTML = (restaurant) => {
   picture.append(image);
   li.append(picture);
 
-  const name = document.createElement('h1');
+  const name = document.createElement('h3');
   name.innerHTML = restaurant.name;
   li.append(name);
 

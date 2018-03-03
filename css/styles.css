@@ -44,7 +44,7 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
   color: #aaa;
   font-size: 8pt;
   letter-spacing: 1px;
-  padding: 25px;
+  padding: 25px 0;
   text-align: center;
   text-transform: uppercase;
 }
@@ -54,6 +54,12 @@ nav {
   height: 80px;
   background-color: #252831;
   text-align:center;
+}
+.breadcrumb {
+  width: 100%;
+  height: 20px;
+  background-color: #eee;
+  text-align:left;
 }
 nav h1 {
   margin: auto;
@@ -165,7 +171,7 @@ nav h1 a {
   min-height: 150px;
   min-width: 180px;
 }
-#restaurants-list li h1 {
+#restaurants-list li h3 {
   color: #f18200;
   font-family: Arial,sans-serif;
   font-size: 14pt;
@@ -256,7 +262,7 @@ nav h1 a {
   width: 50%;
 }
 #reviews-container {
-  padding: 30px 40px 80px;
+  padding: 30px 20px 80px;
 }
 #reviews-container h2 {
   color: #f58500;

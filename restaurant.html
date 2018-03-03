@@ -20,9 +20,15 @@
       <h1><a href="/">Restaurant Reviews</a></h1>
     </nav>
     <!-- Beginning breadcrumb -->
-    <ul id="breadcrumb" >
-      <li><a href="/">Home</a></li>
-    </ul>
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+      <ul id="breadcrumb" >
+        <li>
+          <a href="/#breadcrumb" >
+            Home
+          </a>
+        </li>
+      </ul>
+    </nav>
     <!-- End breadcrumb -->
     <!-- End nav -->
   </header>
@@ -31,7 +37,7 @@
   <!-- Beginning main -->
   <main id="maincontent" class="detailed-layout">
     <!-- Beginning map -->
-    <section id="map-container">
+    <section id="map-container" role="application" aria-label="google maps">
       <div id="map"></div>
     </section>
     <!-- End map -->
@@ -62,15 +68,12 @@
 
   <!-- Beginning scripts -->
   <!-- jquery -->
-  <script
-          src="https://code.jquery.com/jquery-3.3.1.min.js"
-          integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-          crossorigin="anonymous">
-  </script>
+  <script type="application/javascript" charset="utf-8" src="js/jquery-3.2.1.js"></script>
   <!-- Database helpers -->
   <script type="text/javascript" src="js/dbhelper.js"></script>
   <!-- Main javascript file -->
   <script type="text/javascript" src="js/restaurant_info.js"></script>
+  <script type="application/javascript" charset="utf-8" src="sw.js"></script>
   <!-- Google Maps -->
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBUQf7otIr32Sh0MgRDLNevOFY-2tqAKc&libraries=places&callback=initMap"></script>
   <!-- End scripts -->

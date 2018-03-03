@@ -1,6 +1,24 @@
 let restaurant;
 var map;
 
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js').then(function(registration) {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+
+      // here you can look for notifying the user about available updates and force the sw
+      // to update itself
+      // registration.installing and registration.update()
+    }, function(err) {
+      // registration failed :(
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
+
+
 /**
  * sleep function
  * @param ms
@@ -29,6 +47,7 @@ window.initMap = () => {
       /**
        * adds tabindex of -1 to every child
        */
+      /*
       google.maps.event.addListenerOnce(self.map, 'tilesloaded', async function(){
         // do something only the first time the map is loaded
         let el = $("#map").find("*");
@@ -40,6 +59,7 @@ window.initMap = () => {
         // set all children tabindex to -1
         el.find("*").attr("tabindex",-1)
       });
+      */
     }
   });
 }
@@ -81,11 +101,13 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
 
   const name = document.getElementById('restaurant-name');
   name.innerHTML = restaurant.name;
+  name.setAttribute("tabindex",0);
 
   const address = document.getElementById('restaurant-address');
   address.innerHTML = restaurant.address;
   address.id = addressID;
-  address.setAttribute("aria-label",restaurant.address + ".")
+  address.setAttribute("aria-label",restaurant.address + ".");
+  address.setAttribute("tabindex",0);
 
   const picture = document.getElementById('restaurant-img');
   picture.className = 'restaurant-img';
@@ -119,11 +141,8 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
     fillRestaurantHoursHTML();
   }
 
-  // TODO: add all labelledby for the info sideview
+  $("#restaurant-container").attr("aria-labelledby",thumbnailID);
 
-  $("#restaurant-container").attr("aria-labelledby",thumbnailID + " " + addressID+ " restaurant-hours");
-
-  // TODO: labelledby for reviews
   // fill reviews
   fillReviewsHTML();
 }
@@ -133,6 +152,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
  */
 fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => {
   const hours = document.getElementById('restaurant-hours');
+  hours.setAttribute("tabindex",0);
   for (let key in operatingHours) {
     const row = document.createElement('tr');
     // add more readable date format

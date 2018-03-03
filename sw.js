@@ -5,10 +5,36 @@ console.log('Started', self);
 const CACHE_NAME = 'my-site-cache-v1';
 const urlsToCache = [
   '/',
+  'restaurant.html',
   'css/responsiveness.css',
   'css/styles.css',
   'js/main.js',
   'js/dbhelper.js',
+  'sw.js',
+  'js/idb.js',
+  'js/idb_lib.js',
+  'js/jquery-3.2.1.js',
+  'images_cropped/1_large_1x.jpg',
+  'images_cropped/2_large_1x.jpg',
+  'images_cropped/3_large_1x.jpg',
+  'images_cropped/4_large_1x.jpg',
+  'images_cropped/5_large_1x.jpg',
+  'images_cropped/6_large_1x.jpg',
+  'images_cropped/7_large_1x.jpg',
+  'images_cropped/8_large_1x.jpg',
+  'images_cropped/9_large_1x.jpg',
+  'images_cropped/10_large_1x.jpg',
+  'images_cropped/1_medium_1x.jpg',
+  'images_cropped/2_medium_1x.jpg',
+  'images_cropped/3_medium_1x.jpg',
+  'images_cropped/4_medium_1x.jpg',
+  'images_cropped/5_medium_1x.jpg',
+  'images_cropped/6_medium_1x.jpg',
+  'images_cropped/7_medium_1x.jpg',
+  'images_cropped/8_medium_1x.jpg',
+  'images_cropped/9_medium_1x.jpg',
+  'images_cropped/10_medium_1x.jpg',
+  'data/restaurants.json'
 ];
 
 
@@ -61,7 +87,7 @@ self.addEventListener('fetch', function(event) {
 
     event.respondWith(
       caches.open(CACHE_NAME).then(function(cache) {
-        return cache.match(event.request).then(function (response) {
+        return cache.match(event.request,{ignoreSearch:true}).then(function (response) {
           const requestUrl = new URL(event.request.url);
           if(response) console.log("Load from cache: " + requestUrl);
           return response || fetch(event.request).then(function(response) {
@@ -69,8 +95,8 @@ self.addEventListener('fetch', function(event) {
               console.log("Add to cache: " + requestUrl);
               return response;
             }).catch(function(e){
-              console.log("failed to fetch: " +e);
-              return e;
+              console.log("failed to fetch: " + requestUrl);
+              //return e;
             });
         });
       })

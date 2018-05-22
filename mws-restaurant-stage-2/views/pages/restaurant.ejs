@@ -1,0 +1,49 @@
+<!-- Beginning header -->
+<header>
+    <!-- Beginning nav -->
+    <nav>
+        <h1><a href="/">Restaurant Reviews</a></h1>
+    </nav>
+    <!-- Beginning breadcrumb -->
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+        <ul id="breadcrumb">
+            <li>
+                <a href="/#breadcrumb">
+            Home
+          </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- End breadcrumb -->
+    <!-- End nav -->
+</header>
+<!-- End header -->
+
+<!-- Beginning main -->
+<main id="maincontent" class="detailed-layout" role="main">
+    <!-- Beginning map -->
+    <section id="map-container" role="application" aria-label="google maps">
+        <div id="map"></div>
+    </section>
+    <!-- End map -->
+    <!-- Beginning restaurant -->
+    <section tabindex="0" id="restaurant-container">
+        <h3 id="restaurant-name"></h3>
+        <picture id="restaurant-img">
+
+        </picture>
+        <p id="restaurant-cuisine"></p>
+        <p id="restaurant-address"></p>
+        <table id="restaurant-hours"></table>
+    </section>
+    <!-- end restaurant -->
+    <!-- Beginning reviews -->
+    <section tabindex="0" id="reviews-container">
+        <ul id="reviews-list"></ul>
+    </section>
+    <!-- End reviews -->
+</main>
+<!-- End main -->
+
+<script src="/js/utilities/dbhelper.js"></script>
+<script src="/js/manual/restaurant_info.js"></script>

@@ -40,6 +40,7 @@
         </footer>
 
 
+
         <% /*
       Client-side JavaScript
       ========================
@@ -50,9 +51,10 @@
     */ %>
 
             <% /* Load Stripe Checkout */ %>
-                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBUQf7otIr32Sh0MgRDLNevOFY-2tqAKc&libraries=places&callback=initMap"></script>
-                <script async src="/concat/production.min.js"></script>
-                <% /* Delete the global `self` to help avoid client-side bugs.
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBUQf7otIr32Sh0MgRDLNevOFY-2tqAKc&libraries=places&callback=initMap"></script>
+     <script async src="/concat/production.min.js"></script>
+
+    <% /* Delete the global `self` to help avoid client-side bugs.
     (see https://developer.mozilla.org/en-US/docs/Web/API/Window/self) */ %>
 
 </body>

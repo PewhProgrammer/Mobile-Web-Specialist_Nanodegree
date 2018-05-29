@@ -40,7 +40,7 @@ var jsFilesToInject = [
 
 
   // Bring in components & utilities before bringing in the rest (i.e. page scripts)
-  'js/utilities/*.js',
+  //'js/utilities/*.js',
   // All of the rest of your custom client-side js files will be injected here,
   // in no particular order.  To customize the ordering, add additional items
   // here, _above_ this one.

@@ -217,11 +217,12 @@ createRestaurantHTML = (restaurant) => {
 
   src_small.setAttribute("media","(max-width: 343px)");
   src_small.setAttribute("srcset",imageRef[0]+"_small_1x."+imageRef[1]);
-  src_medium.setAttribute("media","(max-width: 780px)");
-  src_medium.setAttribute("srcset",imageRef[0]+"_large_1x."+imageRef[1]);
+  //src_medium.setAttribute("media","(max-width: 780px)");
+  //src_medium.setAttribute("srcset",imageRef[0]+"_large_1x."+imageRef[1]);
 
-  image.className = 'restaurant-img';
+  image.className = 'restaurant-img lazy joke';
   //image.src = imageRef[0]+"_medium_1x."+imageRef[1];
+  image.setAttribute('src',imageRef[0]+"_small_1x."+imageRef[1] ); // add placeholder
   image.setAttribute('data-src',imageRef[0]+"_medium_1x."+imageRef[1] ); // add fake src
   image.alt = `A thumbnail picture of the restaurant 
   ${restaurant.name} which specializes in ${restaurant.cuisine_type} food.`;
@@ -230,6 +231,32 @@ createRestaurantHTML = (restaurant) => {
   picture.append(src_medium);
   picture.append(image);
   li.append(picture);
+
+  document.addEventListener("DOMContentLoaded", function() {
+    let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+
+    console.log("lazyimages");
+    if ("IntersectionObserver" in window) {
+      let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(function(entry) {
+          console.log("AHTHA");
+          if (entry.isIntersecting) {
+            let lazyImage = entry.target;
+            lazyImage.src = lazyImage.dataset.src;
+            lazyImage.srcset = lazyImage.dataset.srcset;
+            lazyImage.classList.remove("lazy");
+            lazyImageObserver.unobserve(lazyImage);
+          }
+        });
+      });
+
+      lazyImages.forEach(function(lazyImage) {
+        lazyImageObserver.observe(lazyImage);
+      });
+    } else {
+      // Possibly fall back to a more compatible method here
+    }
+  });
 
   const name = document.createElement('h3');
   name.innerHTML = restaurant.name;

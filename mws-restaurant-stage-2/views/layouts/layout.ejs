@@ -4,6 +4,12 @@
 <head>
     <title>Restaurant reviews</title>
 
+
+    <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/responsiveness.css">
+
+
     <% /* Viewport tag for sensible mobile support */ %>
         <title>Restaurant Reviews</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,37 +32,9 @@
         by the asset pipeline between "STYLES" and "STYLES END", or both.
         (https://sailsjs.com/docs/concepts/assets/task-automation)
     */ %>
-    <link rel="stylesheet" type="text/css" href="/concat/production.min.css">
+    <!--<link rel="stylesheet" type="text/css" href="/concat/production.min.css"> -->
 </head>
 
-<body>
-
-
     <%- body %>
-
-
-        <footer id="footer">
-            Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
-        </footer>
-
-
-
-        <% /*
-      Client-side JavaScript
-      ========================
-
-      Scripts can be hard-coded as <script> tags, automatically injected
-      by the asset pipeline between "SCRIPTS" and "SCRIPTS END", or both.
-      (https://sailsjs.com/docs/concepts/assets/task-automation)
-    */ %>
-
-            <% /* Load Stripe Checkout */ %>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBUQf7otIr32Sh0MgRDLNevOFY-2tqAKc&libraries=places&callback=initMap"></script>
-     <script async src="/concat/production.min.js"></script>
-
-    <% /* Delete the global `self` to help avoid client-side bugs.
-    (see https://developer.mozilla.org/en-US/docs/Web/API/Window/self) */ %>
-
-</body>
 
 </html>

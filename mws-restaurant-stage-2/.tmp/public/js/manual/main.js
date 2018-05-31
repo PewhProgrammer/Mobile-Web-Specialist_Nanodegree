@@ -217,8 +217,8 @@ createRestaurantHTML = (restaurant) => {
 
   src_small.setAttribute("media","(max-width: 343px)");
   src_small.setAttribute("srcset",imageRef[0]+"_small_1x."+imageRef[1]);
-  //src_medium.setAttribute("media","(max-width: 780px)");
-  //src_medium.setAttribute("srcset",imageRef[0]+"_large_1x."+imageRef[1]);
+  src_medium.setAttribute("media","(max-width: 780px)");
+  src_medium.setAttribute("srcset",imageRef[0]+"_large_1x."+imageRef[1]);
 
   image.className = 'restaurant-img lazy joke';
   //image.src = imageRef[0]+"_medium_1x."+imageRef[1];

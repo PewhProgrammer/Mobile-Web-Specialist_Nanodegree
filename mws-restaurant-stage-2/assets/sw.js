@@ -365,17 +365,6 @@ function createDB(data) {
   });
 }
 
-function readDB() {
-  idb.open('restaurants', 1).then(function(db) {
-    const tx = db.transaction(['beverages'], 'readonly');
-    const store = tx.objectStore('restaurant');
-    return store.getAll();
-  }).then(function(items) {
-    // Use beverage data
-  });
-}
-
-
 
 /**
  * 1. Open a cache.

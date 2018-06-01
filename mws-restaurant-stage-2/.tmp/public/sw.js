@@ -313,19 +313,21 @@
 
 
 
+
 console.log('Started', self);
 
 const CACHE_NAME = 'my-site-cache-v1';
 const urlsToCache = [
+
   '/',
   //'restaurant.html',
   'styles/responsiveness.css',
   'styles/styles.css',
-  'js/main.js',
-  'js/dbhelper.js',
+  'js/manual/main.js',
+  'js/manual/restaurant_info.js',
+  'js/manual/dbhelper.js',
   'sw.js',
-  'js/idb.js',
-  'js/idb_lib.js',
+  'js/utilities/idb_lib.js',
   'js/jquery-3.2.1.js',
   /*
   'images_cropped/1_large_1x.jpg',
@@ -352,8 +354,9 @@ const urlsToCache = [
 ];
 
 function createDB(data) {
+  console.log("creating db...");
   idb.open('restaurants', 1, function(upgradeDB) {
-    let store = upgradeDB.createObjectStore('restaurant', {
+    let store = upgradeDB.createObjectStore('restaurants', {
       keyPath: 'id'
     });
 
@@ -365,16 +368,19 @@ function createDB(data) {
   });
 }
 
-function readDB() {
-  idb.open('restaurants', 1).then(function(db) {
-    const tx = db.transaction(['beverages'], 'readonly');
-    const store = tx.objectStore('restaurant');
-    return store.getAll();
-  }).then(function(items) {
-    // Use beverage data
-  });
-}
+function readDB(url){
 
+  const dbPromise = idb.open(url, 1, function(upgradeDB) {
+  }).then(function(db){
+    let tx = db.transaction([url]);
+    let keyValStore = tx.objectStore(url);
+    return keyValStore.getAll();
+  }).then(function(val){
+    return val;
+  });
+
+  return dbPromise;
+}
 
 
 /**
@@ -388,6 +394,16 @@ self.addEventListener('install', function(event) {
     caches.open(CACHE_NAME)
       .then(function(cache) {
         console.log('Opened cache');
+        const response = fetch('http://localhost:1337/restaurant_info').then(function(response) {
+          return response.json();
+        }).then((json) => {
+          createDB(json.restaurants);
+        }).catch(function(e){
+          console.log("failed to fetch json files or create indexeddb: " + e);
+        });
+
+        console.log("retrieved json: " + response);
+
         return cache.addAll(urlsToCache);
       }).then(function(){
     console.log('Installed', event);
@@ -408,17 +424,30 @@ self.addEventListener('activate', function(event) {
 
 self.addEventListener('fetch', function(event) {
 
+  //console.log("Fetching: " + event.request.url);
   const type = event.request.url.toString().endsWith("restaurant_info");
+  console.log("get in here: " + true);
   if(type){
-    const response = fetch(event.request).then(function(response) {
-      return response.json();
-    }).then((json) => {
-      createDB(json.restaurants);
-    }).catch(function(e){
-      console.log("failed to fetch: " + e);
-    });
-  }
+    event.respondWith(readDB('restaurants').then(function(val){
+        console.log("do i get here?: " + val);
 
+       if(Object.keys(val).length === 0 && val.constructor === Object){
+
+         return fetch(event.request).then(function(response) {
+           cache.put(event.request, response.clone());
+           //console.log("Add to cache: " + requestUrl);
+           return response;
+         }).catch(function(e){
+           console.log("failed to fetch: " + e);
+         })
+         
+       }
+
+      console.log("return from indexeddb");
+      return new Response(JSON.stringify({"restaurants":val}), { "status" : 200 , "statusText" : "SuperSmashingGreat!" });
+    })
+  )
+  }else{
     event.respondWith(
 
       caches.open(CACHE_NAME).then(function(cache) {
@@ -438,49 +467,7 @@ self.addEventListener('fetch', function(event) {
         });
       })
     );
-
-/*
-  caches.open(CACHE_NAME).then(function(cache) {
-    cache.match(event.request, {ignoreSearch: true}).then(response => {
-      const requestUrl = new URL(event.request.url);
-      if(response){
-        console.log("Load from cache: " + requestUrl);
-        return response;
-      }
-      return fetch(event.request).then(function(response) {
-        console.log("Add to cache: " + requestUrl);
-        cache.put(event.request, response.clone());
-        return response;
-      }).catch(function(){
-        console.log("failed to catch: " +  requestUrl);
-      });
-
-    })
-  });
-*/
-    /*
-    const requestUrl = new URL(event.request.url);
-
-    event.respondWith(
-      caches.match(event.request)
-        .then(function(response) {
-            // Cache hit - return response
-            //console.log("sent: " +  JSON.stringify(response));
-            return response ||
-              fetch(event.request).then(function(networkResponse){
-                  if(networkResponse.status === 404){
-                    // requested url page is not on the server
-                      return new Response("Whopps, not found!");
-                  }
-                  return networkResponse;
-              }).catch(function(){
-                // offline
-                return new Response("it appears that you are offline!!");
-              });
-          }
-        )
-    );
-    */
+  }
 
 });
 

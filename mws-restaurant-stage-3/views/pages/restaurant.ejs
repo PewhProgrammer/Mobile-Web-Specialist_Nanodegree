@@ -1,0 +1,79 @@
+<!-- Beginning header -->
+<header class="inside">
+    <!-- Beginning nav -->
+    <nav>
+        <h1><a href="/">Restaurant Reviews</a></h1>
+    </nav>
+    <!-- Beginning breadcrumb -->
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+        <ul id="breadcrumb" >
+            <li>
+                <a href="/#breadcrumb" >
+                    Home
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- End breadcrumb -->
+    <!-- End nav -->
+</header>
+<!-- End header -->
+
+<!-- Beginning main -->
+<main id="maincontent" class="detailed-layout inside" role="main" >
+    <!-- Beginning map -->
+    <section id="map-container" role="application" aria-label="google maps">
+        <div id="map"></div>
+    </section>
+    <!-- End map -->
+    <!-- Beginning restaurant -->
+    <section tabindex="0" id="restaurant-container">
+        <h3 id="restaurant-name"></h3>
+        <picture id="restaurant-img">
+
+        </picture>
+        <p id="restaurant-cuisine"></p>
+        <p id="restaurant-address"></p>
+        <table id="restaurant-hours"></table>
+    </section>
+    <!-- end restaurant -->
+    <!-- Beginning reviews -->
+    <section tabindex="0" id="reviews-container">
+        <ul id="reviews-list"></ul>
+
+        <div class="rating">
+            <span>☆</span>
+        </div>
+
+        <div class="container">
+            <form onSubmit="return submitReview(firstname.value,lastname.value,country.value, subject.value);">
+
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+                <label for="country">Rating</label>
+                <select id="country" name="country">
+                    <option value="5">Very Good</option>
+                    <option value="4">Good</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Bad</option>
+                    <option value="1">Very Bad</option>
+                </select>
+
+                <label for="subject">Review</label>
+                <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+
+                <input type="submit" value="Submit">
+
+            </form>
+        </div>
+
+    </section>
+    <!-- End reviews -->
+</main>
+<!-- End main -->
+
+<script type="application/javascript" charset="utf-8" src="js/manual/restaurant_info.js"></script>
